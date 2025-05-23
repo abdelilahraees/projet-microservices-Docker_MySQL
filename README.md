@@ -39,4 +39,4 @@ A scalable e-commerce platform built with microservices architecture.
 
 #### Clone the project
 ```sh
-git clone https://github.com/abdelilahraees/first_project_spring_boot_micro_services.git
+https://github.com/abdelilahraees/projet-microservices-Docker_MySQL.git
