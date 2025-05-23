@@ -19,7 +19,7 @@
 - [Tests](#-tests)
 - [Contributions](#-contributions)
 
-## 🏗️ Architecture
+```mermaid
 graph TD
     A[Client] --> B[API Gateway]
     B --> C[Service Commande]
@@ -32,3 +32,4 @@ graph TD
     C --> H[MySQL]
     D --> H
     E --> H
+```
