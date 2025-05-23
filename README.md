@@ -6,7 +6,7 @@
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
 ![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-2024.0.0-brightgreen)
 
-## Table des matières
+## 📋 Table des matières
 - [Architecture](#-architecture)
 - [Services](#-services)
 - [Technologies](#-technologies)
@@ -19,7 +19,7 @@
 - [Tests](#-tests)
 - [Contributions](#-contributions)
 
-##  Architecture
+## 🏗️ Architecture
 graph TD
     A[Client] --> B[API Gateway]
     B --> C[Service Commande]
