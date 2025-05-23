@@ -1,0 +1,131 @@
+version: '3.8'
+services:
+  config-service:
+    image: config-service-img
+    container_name: config-service
+    ports:
+      - "801:801" # Eureka Server default port
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
+    depends_on:
+      - discovery-service
+    networks:
+      - microservices-network
+  discovery-service:
+    image: discovery-service-img
+    container_name: discovery-service
+    ports:
+      - "8761:8761" # Discovery Server default port
+    networks:
+      - microservices-network
+
+
+
+  inventory-service:
+    image: inventory-service-img
+    container_name: inventory-service
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-service:3306/app_db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD:=root
+    ports:
+      - "8080:8080"
+    depends_on:
+      - discovery-service
+      - mysql-service
+    networks:
+      - microservices-network
+
+  command-service:
+    image: command-service-img
+    container_name: command-service
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://host.docker.internal:801
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-service:3306/app_db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD:=root
+    ports:
+      - "8081:8081"
+    depends_on:
+      - discovery-service
+      - mysql-service
+    networks:
+      - microservices-network
+
+
+
+
+  gateway-service:
+    image: gateway-service-img
+    container_name: gateway-service
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
+#      - SPRING_CONFIG_IMPORT=optional:configserver:http://host.docker.internal:801
+#      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-service:3306/app_db
+#      - SPRING_DATASOURCE_USERNAME=root
+#      - SPRING_DATASOURCE_PASSWORD:=root
+    ports:
+      - "8888:8888"
+    depends_on:
+      - discovery-service
+#      - mysql-service
+    networks:
+      - microservices-network
+
+
+  customer-service:
+    image: customer-service-img
+    container_name: customer-service
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://host.docker.internal:801
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-service:3306/app_db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD:=root
+    ports:
+      - "8077:8077"
+    depends_on:
+      - discovery-service
+      - mysql-service
+    networks:
+      - microservices-network
+
+  mysql-service:
+    image: mysql:8.0
+    container_name: mysql-service-container
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 1234
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - microservices-network
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-service
+    environment:
+      PMA_HOST: mysql-service
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql-service
+    networks:
+      - microservices-network
+
+
+
+networks:
+  microservices-network:
+    driver: bridge
+volumes:
+  mysql-data:

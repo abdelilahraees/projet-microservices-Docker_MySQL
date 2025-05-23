@@ -1,0 +1,5 @@
+spring.application.name=discovery
+server.port=8761
+
+
+spring.cloud.config.enabled=true

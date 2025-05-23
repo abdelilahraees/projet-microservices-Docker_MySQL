@@ -1,0 +1,20 @@
+package com.example.customerservice.model.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class CommandDto {
+    private String description;
+    private String command;
+    private LocalDateTime createdAt;
+    private long customer_id;
+    private double total_price;
+}

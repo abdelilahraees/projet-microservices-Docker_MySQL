@@ -1,0 +1,2 @@
+package com.example.customerservice.model.mapping;public interface CustomerMap {
+}
