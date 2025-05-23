@@ -1,45 +1,72 @@
-# Architecture Microservices avec Spring Boot et Docker
+
+
+# Microservices Architecture Project
 
 ![Java](https://img.shields.io/badge/Java-21-blue)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.3-green)
-![Docker](https://img.shields.io/badge/Docker-20.10+-important)
-![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
-![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-2024.0.0-brightgreen)
 
-## 📋 Table des matières
-- [Architecture](#-architecture)
-- [Services](#-services)
-- [Technologies](#-technologies)
-- [Prérequis](#-prérequis)
-- [Installation](#-installation)
-- [Configuration](#-configuration)
-- [Déploiement](#-déploiement)
-- [API](#-api)
-- [Base de données](#-base-de-données)
-- [Tests](#-tests)
-- [Contributions](#-contributions)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-green)
 
-```mermaid
-graph TD
-    A[Client] --> B[API Gateway]
-    B --> C[Service Commande]
-    B --> D[Service Client]
-    B --> E[Service Inventaire]
-    C --> F[Service Discovery]
-    D --> F
-    E --> F
-    F --> G[Config Server]
-    C --> H[MySQL]
-    D --> H
-    E --> H
-```
-📦 Services
-Service	Description	Port	Docker Image
-config-service	Central configuration	8888	config-service:latest
-discovery-service	Eureka Service Registry	8761	discovery-service:latest
-gateway-service	API Gateway	8080	gateway-service:latest
-order-service	Order processing	8081	order-service:latest
-customer-service	Customer management	8082	customer-service:latest
-inventory-service	Product inventory	8083	inventory-service:latest
-mysql-db	MySQL Database	3306	mysql:8.0
+![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-2024-brightgreen)
+
+A scalable e-commerce platform built with microservices architecture.
+
+## 📦 Services Overview
+
+| Service              | Description                          | Port  |
+
+|----------------------|--------------------------------------|-------|
+
+| config-service     | Centralized configuration server    | 8888  |
+
+| discovery-service  | Service registry (Eureka)           | 8761  |
+
+| gateway-service    | API Gateway (Spring Cloud Gateway)  | 8080  |
+
+| customer-service   | Handles customer data               | 8081  |
+
+| product-service    | Manages product catalog             | 8082  |
+
+## 🛠️ Technologies
+
+- Core: 
+
+  - Java 21, Spring Boot 3.4, Spring Cloud 2024
+
+- Communication: 
+
+  - OpenFeign (REST), Spring Cloud Gateway (Routing)
+
+- Infrastructure: 
+
+  - Eureka (Service Discovery), Config Server
+
+- Database: 
+
+  - MySQL (Relational)
+
+- Resilience:
+
+  - Circuit Breaker (Resilience4j)
+
+## Quick Start
+
+### Prerequisites
+
+- JDK 21+
+
+- Maven 3.9+
+
+- MySQL 8.0+
+
+### Installation
+
+# Clone the project
+
+git clone https://github.com/abdelilahraees/first_project_spring_boot_micro_services.git
+
+# Build all services
+
+mvn clean install
+
+donnez un file comme et ajouter docker sauf
 
