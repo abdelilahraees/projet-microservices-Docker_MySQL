@@ -4,6 +4,7 @@
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.3-green)
 ![Docker](https://img.shields.io/badge/Docker-20.10+-important)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
+![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-2024.0.0-brightgreen)
 
 ## Table des matières
 - [Architecture](#-architecture)
